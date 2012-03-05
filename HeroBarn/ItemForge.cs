@@ -7,5 +7,6 @@ namespace HeroBarn
 {
     class ItemForge
     {
+        //I added some code
     }
 }
