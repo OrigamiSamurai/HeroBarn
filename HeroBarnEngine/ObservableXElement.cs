@@ -7,8 +7,17 @@ using System.Text;
 
 namespace HeroBarn
 {
-    class ObservableObjectWrapper
+    public class ObservableXElement
     {
+        public ObservableXElement(XElement xElem)
+        {
+            xElement = xElem;
+        }
+        public ObservableXElement(string xElemXName)
+        {
+            xElement = new XElement(xElemXName);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string name)
@@ -20,20 +29,12 @@ namespace HeroBarn
             }
         }
 
-        private string m_Name;
+        private XElement m_xElement = new XElement("NewObservableXElement");
 
-        public string Name
+        public XElement xElement
         {
-            set { m_Name = value; OnPropertyChanged("Name"); }
-            get { return m_Name; }
-        }
-
-        private object m_heldObject = new object();
-
-        public object HeldObject
-        {
-            set { m_heldObject = value; OnPropertyChanged("HeldObject"); }
-            get { return m_heldObject; }
+            set { m_xElement = value; OnPropertyChanged("xElement"); }
+            get { return m_xElement; }
         }
     }
 }

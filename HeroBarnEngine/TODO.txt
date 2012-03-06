@@ -1,5 +1,7 @@
 ﻿<!--
 
+
+TODO: pull out any non-UI related stuff into class library(ies) as a separate project in solution
 TOSO: pull update functionality into container for observablecascasdingstat (rename) and register to events raised from them
 TODO: rewrite parser for math expressions to use my methods
 TODO: Add definitions in metalanguage for rounddown, round up, other math functions

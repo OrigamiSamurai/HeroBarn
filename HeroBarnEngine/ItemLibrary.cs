@@ -8,7 +8,7 @@ using System.Text;
 
 namespace HeroBarn
 {
-    class ItemLibrary
+    public class ItemLibrary
     {
         public static ObservableCollection<XElement> currentItemsInLibrary = new ObservableCollection<XElement> { };
 

@@ -4,11 +4,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Xml.Linq;
 using System.Text;
-using System.Windows;
 
 namespace HeroBarn
 {
-    class Hero
+    public class Hero
     {
         public static ObservableCollection<ObservableObjectWrapper> heroStats = new ObservableCollection<ObservableObjectWrapper> { new ObservableObjectWrapper { Name = "ObservableStat1", HeldObject = new XElement("IAmAnXElement") } };
 
@@ -32,10 +31,10 @@ namespace HeroBarn
 
         private void stat_PropertyChanged(object sender, EventArgs e)
         {
-            MessageBoxResult message = MessageBox.Show(sender.ToString());
+           // MessageBoxResult message = MessageBox.Show(sender.ToString());
         }
 
-        public static void UpdateObservableObjectWrapper(this ObservableObjectWrapper observableObjectWrapper)
+        public static void UpdateObservableObjectWrapper(ObservableObjectWrapper observableObjectWrapper)
         {
             //get my name
             /*myParentFields = GetRelevantFields(observableObjectWrapper.Name)*/

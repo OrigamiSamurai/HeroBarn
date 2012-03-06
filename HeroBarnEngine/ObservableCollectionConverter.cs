@@ -6,7 +6,7 @@ using System.Text;
 
 namespace HeroBarn
 {
-    static class ObservableCollectionConverter
+    public static class ObservableCollectionConverter
     {
         /// <summary>
         /// Takes an enumerable and creates an observable collection.

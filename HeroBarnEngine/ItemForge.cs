@@ -7,7 +7,7 @@ using System.Text;
 
 namespace HeroBarn
 {
-    class ItemForge
+    public class ItemForge
     {
         //I added some code
 

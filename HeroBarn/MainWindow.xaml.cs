@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HeroBarnEngine;
 
 namespace HeroBarn
 {
@@ -257,11 +258,7 @@ namespace HeroBarn
 
         private void CustomItemCreateBaseItem_Button_Click(object sender, RoutedEventArgs e)
         {
-            Hero blah = new Hero();
-            blah.herro.Name = "fsefes";
-            blah.herro.Name = "fsfsfse";
-
-            /*ItemForge itemForge = new ItemForge();
+            ItemForge itemForge = new ItemForge();
             ItemForge.currentCustomItemBasicAttributes.xElement = itemForge.CreateValidatedXElement(
                 "Item",
                 new string[] { "Name", "Cost", "Weight", "HitPoints", "Hardness", "Source" },
@@ -271,7 +268,7 @@ namespace HeroBarn
             CustomItemSelectPropertyToEdit_StackPanel.Visibility = System.Windows.Visibility.Visible;
             CustomItemUpdateBasicItemAttributes.Visibility = System.Windows.Visibility.Visible;
             CustomItemCreateBaseItem_Button.Visibility = System.Windows.Visibility.Collapsed;
-            CustomItemBasicAttributes_TextBlock.Visibility = System.Windows.Visibility.Visible; */
+            CustomItemBasicAttributes_TextBlock.Visibility = System.Windows.Visibility.Visible;
         }
 
         private void CustomItemAddToLibrary_Button_Click(object sender, RoutedEventArgs e)
