@@ -10,11 +10,11 @@ namespace HeroBarn
 {
     class Hero
     {
-        public static ObservableCollection<ObservableCascadingStat> heroStats = new ObservableCollection<ObservableCascadingStat> { new ObservableCascadingStat { Name = "ObservableStat1", HeldObject = new XElement("IAmAnXElement") } };
+        public static ObservableCollection<ObservableObjectWrapper> heroStats = new ObservableCollection<ObservableObjectWrapper> { new ObservableObjectWrapper { Name = "ObservableStat1", HeldObject = new XElement("IAmAnXElement") } };
 
         XElement linkedStats = XElement.Load("UpdateWeb.xml");
 
-        public ObservableCascadingStat herro = new ObservableCascadingStat { Name = "ObservableStat1", HeldObject = new XElement("IAmAnXElement") };
+        public ObservableObjectWrapper herro = new ObservableObjectWrapper { Name = "ObservableStat1", HeldObject = new XElement("IAmAnXElement") };
 
 
         public Hero()
@@ -24,7 +24,7 @@ namespace HeroBarn
 
         private void SubscribeToStatChanges()
         {
-            foreach (ObservableCascadingStat stat in heroStats)
+            foreach (ObservableObjectWrapper stat in heroStats)
             {
                 herro.PropertyChanged += new System.ComponentModel.PropertyChangedEventHandler(stat_PropertyChanged);
             }
@@ -35,21 +35,23 @@ namespace HeroBarn
             MessageBoxResult message = MessageBox.Show(sender.ToString());
         }
 
-        public void UpdateObservableCascadingStat()
+        public static void UpdateObservableObjectWrapper(this ObservableObjectWrapper observableObjectWrapper)
         {
             //get my name
-            //get list of elements that I should work with to figure out my value
-            //get operations to perform
-            //perform some operation on that data
+            /*myParentFields = GetRelevantFields(observableObjectWrapper.Name)*/
+                //get list of elements that I should work with to figure out my value
+            /*calculateField(myParentFields, observableObjectWrapper.Name)*/
+                //get operations to perform
+                //perform some operation on that data
             //set my HeldObject's value to that
         }
 
-        public void UpdateLinkedChildObservableCascadingStats(string currentFieldName)
+        public void UpdateLinkedChildObservableObjectWrappers(string currentFieldName)
         {
             //get child stats
             //go update them
             linkedStats = XElement.Load("UpdateWeb.xml");
-            var myLinkedStatNames = GetLinkedChildObservableCascadingStatNames(currentFieldName);
+            var myLinkedStatNames = GetLinkedChildObservableObjectWrapperNames(currentFieldName);
             if (myLinkedStatNames.Any())
             {
                 foreach (string statName in myLinkedStatNames)
@@ -60,9 +62,8 @@ namespace HeroBarn
 
         }
 
-        public string[] GetLinkedChildObservableCascadingStatNames(string currentFieldName)
+        public string[] GetLinkedChildObservableObjectWrapperNames(string currentFieldName)
         {
-            //get names of child stats
             var linkedStatNames = from stats in linkedStats.Element(currentFieldName).Elements() where stats.Name.ToString() == currentFieldName select stats.Name.ToString();
             return linkedStatNames.ToArray();
         }

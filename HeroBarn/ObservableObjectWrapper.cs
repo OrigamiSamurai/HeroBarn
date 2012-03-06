@@ -24,7 +24,7 @@ namespace HeroBarn
 
         public string Name
         {
-            set { m_Name = value; new  /*OnPropertyChanged("Name")*/; }
+            set { m_Name = value; OnPropertyChanged("Name"); }
             get { return m_Name; }
         }
 
