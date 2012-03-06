@@ -1,8 +1,289 @@
 ﻿<Window x:Class="HeroBarn.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="Auto" Width="1000">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Margin" Value="0,2,0,2" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="0,2,0,2" />
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="0,2,0,2" />
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="5,2,5,2" />
+        </Style>
+        <Style TargetType="{x:Type StackPanel}">
+            <Setter Property="Margin" Value="5,2,5,2" />
+        </Style>
+        <Style TargetType="{x:Type WrapPanel}">
+            <Setter Property="Margin" Value="0,0,0,0" />
+        </Style>
+        <Style TargetType="{x:Type Border}" x:Key="Border">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="Gray" />
+            <Setter Property="Margin" Value="5,5,5,5" />
+        </Style>
+        <Style TargetType="{x:Type ListBox}">
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Height" Value="Auto"/>
+        </Style>
+    </Window.Resources>
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Item Attributes:" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <Border Style="{StaticResource Border}">
+                <WrapPanel Orientation="Horizontal" >
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Name" HorizontalAlignment="Left"/>
+                        <TextBox HorizontalAlignment="Left" Name="CustomItemName_TextBox" Width="200"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Cost" HorizontalAlignment="Left"/>
+                        <TextBox HorizontalAlignment="Left" Name="CustomItemCost_TextBox" Width="40"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Weight" HorizontalAlignment="Left"/>
+                        <TextBox HorizontalAlignment="Left" Name="CustomItemWeight_TextBox" Width="40"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Hit Points" HorizontalAlignment="Left"/>
+                        <TextBox HorizontalAlignment="Left" Name="CustomItemHitPoints_TextBox" Width="40"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Hardness" HorizontalAlignment="Left"/>
+                        <TextBox HorizontalAlignment="Left" Name="CustomItemHardness_TextBox" Width="40"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Source" HorizontalAlignment="Left"/>
+                        <TextBox Text="Base Item" HorizontalAlignment="Left" Name="CustomItemSource_TextBox" Width="200"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button Content="Create Base Item" Name="CustomItemCreateBaseItem_Button" Click="CustomItemCreateBaseItem_Button_Click" Visibility="Visible"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <Button Content="Update Basic Item Attributes" Name="CustomItemUpdateBasicItemAttributes" Click="CustomItemUpdateBasicItemAttributes_Click" Visibility="Collapsed"/>
+                    </StackPanel>
+                </WrapPanel>
+            </Border>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Visibility="Collapsed" Name="CustomItemSelectPropertyToEdit_StackPanel">
+                    <Label Content="Select Property to Add to Item" />
+                    <ComboBox HorizontalAlignment="Left" Name="CustomItemSelectPropertyToEdit_ComboBox" ItemsSource="{Binding}" Width="160" SelectionChanged="CustomItemSelectPropertyToEdit_ComboBox_SelectionChanged" />
+                </StackPanel>
+            </StackPanel>
+            <Border Name="PropertyPanelBorder" Style="{StaticResource Border}" Visibility="Collapsed">
+                <StackPanel>
+                    <StackPanel Name="WeaponPropertyPanel" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Weapon Attributes:" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Name" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomWeaponName_TextBox" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Critical Multiplier" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomWeaponCriticalMultiplier_TextBox" Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Critical Range" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomWeaponCriticalRange_TextBox" Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Range Increment" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomWeaponRangeIncrement_TextBox" Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Hands Used" HorizontalAlignment="Left"/>
+                                <ComboBox HorizontalAlignment="Left" Name="CustomWeaponHandsUsedByDefault_ComboBox" ItemsSource="{Binding}" Width="120" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Weapon Proficiency" HorizontalAlignment="Left"/>
+                                <ComboBox HorizontalAlignment="Left" Name="CustomWeaponProficiency_ComboBox" ItemsSource="{Binding}" Width="120" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Sized For" HorizontalAlignment="Left"/>
+                                <ComboBox HorizontalAlignment="Left" Name="CustomWeaponSizedFor_ComboBox" ItemsSource="{Binding}" Width="120" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Source" HorizontalAlignment="Left"/>
+                                <TextBox Text="Base Item" HorizontalAlignment="Left" Name="CustomWeaponSource_TextBox" Width="200"/>
+                            </StackPanel>
+                        </WrapPanel>
+                        <StackPanel>
+                            <Border Style="{StaticResource Border}">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Damage Die:" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Size" HorizontalAlignment="Left"/>
+                                            <ComboBox HorizontalAlignment="Left" Name="CustomWeaponDamageDieSize_TextBox" ItemsSource="{Binding}" Width="40" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Damage Type" HorizontalAlignment="Left"/>
+                                            <ComboBox HorizontalAlignment="Left" Name="CustomWeaponDamageDieType_ComboBox" ItemsSource="{Binding}" Width="120" />
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Source" HorizontalAlignment="Left"/>
+                                            <TextBox Text="Base Item" HorizontalAlignment="Left" Name="CustomWeaponDamageDieSource_TextBox" Width="200"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="Add to List" Name="CustomWeaponDamageDieAdd_Button" Click="CustomWeaponDamageDieAdd_Button_Click" />
+                                            <Button Content="Clear Damage Dice from List" Name="CustomWeaponDamageDieClear_Button" Click="CustomWeaponDamageDieClear_Button_Click" />
+                                        </StackPanel>
+                                    </WrapPanel>
+                                    <StackPanel>
+                                        <ListBox Name="CustomWeaponDamageDiceDisplay_ListBox" ItemsSource="{Binding}" KeyDown="CustomWeaponDamageDiceDisplay_ListBox_KeyDown" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <Border Style="{StaticResource Border}">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Weapon Power:" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Name" HorizontalAlignment="Left"/>
+                                            <TextBox HorizontalAlignment="Left" Name="CustomWeaponPowerName_TextBox" Width="200"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Source" HorizontalAlignment="Left"/>
+                                            <TextBox Text="Base Item" HorizontalAlignment="Left" Name="CustomWeaponPowerSource_TextBox" Width="200"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="Add to List" Name="CustomWeaponPowerAdd_Button" Click="CustomWeaponPowerAdd_Button_Click" />
+                                            <Button Content="Clear Powers from List" Name="CustomWeaponPowerClear_Button" Click="CustomWeaponPowerClear_Button_Click" />
+                                        </StackPanel>
+                                    </WrapPanel>
+                                    <StackPanel>
+                                        <ListBox Name="CustomWeaponPowersDisplay_ListBox" ItemsSource="{Binding}" KeyDown="CustomWeaponPowersDisplay_ListBox_KeyDown" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel>
+                            <Button Content="Add Weapon To Item" Name="CustomItemAddWeaponProperty_Button" Click="CustomItemAddWeaponProperty_Button_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Name="ArmorPropertyPanel" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Armor Attributes:" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal" >
+                                <Label Content="Name" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomArmorName_TextBox" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Armor Type" HorizontalAlignment="Left"/>
+                                <ComboBox HorizontalAlignment="Left" Name="CustomArmorType_ComboBox" ItemsSource="{Binding}" Width="120" SelectionChanged="CustomArmorType_ComboBox_SelectionChanged" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" >
+                                <Label Content="Armor Proficiency" HorizontalAlignment="Left"/>
+                                <ComboBox HorizontalAlignment="Left" Name="CustomArmorProficiency_ComboBox" ItemsSource="{Binding}" Width="120" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="AC Bonus" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomArmorArmorClassBonus_TextBox" Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Max Dex Bonus" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomArmorMaxDexterityBonus_TextBox" Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Armor Check Penalty" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomArmorCheckPenalty_TextBox" Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Arcane Spell Failure Chance (Do not add %)" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomArmorArcaneSpellFailureChance_TextBox" Width="40"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Sized For" HorizontalAlignment="Left"/>
+                                <ComboBox HorizontalAlignment="Left" Name="CustomArmorSizedFor_ComboBox" ItemsSource="{Binding}" Width="120" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Metal?" HorizontalAlignment="Left"/>
+                                <ComboBox HorizontalAlignment="Left" Name="CustomArmorIsMetal" ItemsSource="{Binding}" Width="60" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Source" HorizontalAlignment="Left"/>
+                                <TextBox Text="Base Item" HorizontalAlignment="Left" Name="CustomArmorSource_TextBox" Width="200"/>
+                            </StackPanel>
+                        </WrapPanel>
+                        <StackPanel>
+                            <Border Style="{StaticResource Border}">
+                                <StackPanel >
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Armor Power:" HorizontalAlignment="Left"/>
+                                    </StackPanel>
+                                    <WrapPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Name" HorizontalAlignment="Left"/>
+                                            <TextBox HorizontalAlignment="Left" Name="CustomArmorPowerName_TextBox" Width="200"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label Content="Source" HorizontalAlignment="Left"/>
+                                            <TextBox Text="Base Item" HorizontalAlignment="Left" Name="CustomArmorPowerSource_TextBox" Width="200"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button Content="Add to List" Name="CustomArmorPowerAdd_Button" Click="CustomArmorPowerAdd_Button_Click" />
+                                            <Button Content="Clear Powers from List" Name="CustomArmorPowerClear_Button" Click="CustomArmorPowerClear_Button_Click" />
+                                        </StackPanel>
+                                    </WrapPanel>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel>
+                            <ListBox Name="CustomArmorPowersDisplay_ListBox" ItemsSource="{Binding}" KeyDown="CustomArmorPowersDisplay_ListBox_KeyDown"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <Button Content="Add Armor To Item" Name="CustomItemAddArmorProperty_Button" Click="CustomItemAddArmorProperty_Button_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Name="ItemPowersPanel" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="General Item Powers:" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Name" HorizontalAlignment="Left"/>
+                                <TextBox HorizontalAlignment="Left" Name="CustomItemPowerName_TextBox" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="Source" HorizontalAlignment="Left"/>
+                                <TextBox Text="Base Item" HorizontalAlignment="Left" Name="CustomItemPowerSource_TextBox" Width="200"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Add to List" Name="CustomItemPowerAdd_Button" Click="CustomItemPowerAdd_Button_Click" />
+                                <Button Content="Clear Powers from List" Name="CustomItemPowerClear_Button" Click="CustomItemPowerClear_Button_Click" />
+                            </StackPanel>
+                        </WrapPanel>
+                        <StackPanel>
+                            <ListBox Name="CustomItemPowersDisplay_ListBox" ItemsSource="{Binding}" KeyDown="CustomItemPowersDisplay_ListBox_KeyDown" />
+                        </StackPanel>
+                        <StackPanel>
+                            <Button Content="Add Powers To Item" Name="CustomItemAddPowers_Button" Click="CustomItemAddPowers_Button_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <TextBlock Name="CustomItemBasicAttributes_TextBlock" Text="{Binding Path=xElement}" Visibility="Collapsed"/>
+            <StackPanel>
+                <ListBox Name="CustomItemPropertiesDisplay_ListBox" ItemsSource="{Binding}"  Visibility="Collapsed" KeyDown="CustomItemPropertiesDisplay_ListBox_ListBox_KeyDown"/>
+            </StackPanel>
+            <StackPanel>
+                <Button Content="Add Me to the Item Library!" Name="CustomItemAddToLibrary_Button" Click="CustomItemAddToLibrary_Button_Click" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Window>

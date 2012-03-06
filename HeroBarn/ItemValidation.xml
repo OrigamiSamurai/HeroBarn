@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ValidationValues>
+  <XElements>
+    <Item>
+      <ValidChildNames>
+        <Weapon />
+        <Armor />
+        <PowerLink />
+      </ValidChildNames>
+      <ValidAttributeNames>
+        <Name Required="true" ValidValueType="string" />
+        <Cost Required="true" ValidValueType="decimal" />
+        <Weight Required="true" ValidValueType="decimal" />
+        <HitPoints Required="false" ValidValueType="integer" />
+        <Hardness Required="false" ValidValueType="integer" />
+        <Source Required="true" ValidValueType="string" />
+      </ValidAttributeNames>
+    </Item>
+    <Weapon>
+      <ValidChildNames>
+        <DamageDie />
+        <PowerLink />
+      </ValidChildNames>
+      <ValidAttributeNames>
+        <Name Required="true" ValidValueType="string" />
+        <CriticalMultiplier Required="true" ValidValueType="integer" />
+        <CriticalRange Required="true" ValidValueType="integer" />
+        <RangeIncrement Required="true" ValidValueType="integer5" />
+        <HandsUsedByDefault Required="true" ValidValueType="SPECIFIC:HandsUsedByDefault" />
+        <WeaponProficiency Required="true" ValidValueType="SPECIFIC:WeaponProficiency" />
+        <SizedFor Required="true" ValidValueType="SPECIFIC:Size"/>
+        <Source Required="true" ValidValueType="string" />
+      </ValidAttributeNames>
+    </Weapon>
+    <Armor>
+      <ValidChildNames>
+        <PowerLink />
+      </ValidChildNames>
+      <ValidAttributeNames>
+        <Name Required="true" ValidValueType="string" />
+        <ArmorType Required="true" ValidValueType="SPECIFIC:ArmorType" />
+        <ArmorProficiency Required="true" ValidValueType="SPECIFIC:ArmorProficiency" />
+        <ArmorClassBonus Required="true" ValidValueType="integer" />
+        <MaxDexterityBonus Required="true" ValidValueType="integer" />
+        <ArmorCheckPenalty Required="true" ValidValueType="integer5" />
+        <ArcaneSpellFailureChance Required="true" ValidValueType="integer" />
+        <SizedFor Required="true" ValidValueType="SPECIFIC:Size" />
+        <IsMetal Required="true" ValidValueType="SPECIFIC:YesOrNo" />
+        <Source Required="true" ValidValueType="string"/>
+      </ValidAttributeNames>
+    </Armor>
+    <PowerLink>
+      <ValidAttributeNames>
+        <Name Required="true" ValidValueType="string" />
+        <Source Required="true" ValidValueType="string" />
+      </ValidAttributeNames>
+    </PowerLink>
+    <DamageDie>
+      <ValidAttributeNames>
+        <DieSize Required="true" ValidValueType="integer" />
+        <DamageType Required="true" ValidValueType="SPECIFIC:DamageType" />
+        <Source Required="true" ValidValueType="string" />
+      </ValidAttributeNames>
+    </DamageDie>
+  </XElements>
+  <GlobalValues>
+    <Size>
+      <Fine />
+      <Diminutive />
+      <Tiny />
+      <Small />
+      <Medium />
+      <Large />
+      <Huge />
+      <Gargantuan />
+      <Colossal />
+    </Size>
+    <HandsUsedByDefault>
+      <Unarmed />
+      <Light />
+      <OneHanded />
+      <TwoHanded />
+    </HandsUsedByDefault>
+    <WeaponProficiency>
+      <Simple />
+      <Martial />
+      <Exotic />
+    </WeaponProficiency>
+    <ArmorType>
+      <Light />
+      <Medium />
+      <Heavy />
+      <Shield />
+      <TowerShield />
+    </ArmorType>
+    <ArmorProficiency>
+      <Light />
+      <Medium />
+      <Heavy />
+      <Shield />
+      <TowerShield />
+    </ArmorProficiency>
+    <DamageType>
+      <Bludgeoning />
+      <Piercing />
+      <Slashing />
+      <BludgeoningOrPiercing />
+      <BludgeoningOrSlashing />
+      <PiercingOrSlashing />
+      <Fire />
+      <Cold />
+      <Electricity />
+      <Acid />
+      <Divine />
+      <Negative />
+      <Positive />
+    </DamageType>
+    <DieSize>
+      <Size>2</Size>
+      <Size>3</Size>
+      <Size>4</Size>
+      <Size>6</Size>
+      <Size>8</Size>
+      <Size>10</Size>
+      <Size>12</Size>
+      <Size>20</Size>
+    </DieSize>
+    <YesOrNo>
+      <Yes />
+      <No />
+    </YesOrNo>
+  </GlobalValues>
+</ValidationValues>

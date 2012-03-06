@@ -1,0 +1,83 @@
+﻿<!--
+
+TOSO: pull update functionality into container for observablecascasdingstat (rename) and register to events raised from them
+TODO: rewrite parser for math expressions to use my methods
+TODO: Add definitions in metalanguage for rounddown, round up, other math functions
+TODO: Add senses to UpdateWeb.xml
+TODO: continue mapping using UpdateWeb.xml
+TODO: build viewer for updateweb.xml that checks for loops
+TODO: validation - use 2 dim array (look at dictionary collection)
+TODO: add on enter key
+TODO: test for invalid values for all fields
+TODO: add catch for validation errors
+TODO: create ability to add to library (should add item to the library and add any power names to a list of power names -utility so I can grab them later-)
+TODO: add display of sum total of powers for each type of property
+TODO: add clarification of armor check penalty, convert to negative value
+TODO: Add validation of range increments
+TODO: add validation of arcane spell failure chance multuiple of five
+TODO: add function to build basic item element when property add selection is changed, also auto update those fields when they are changed as you edit
+TODO: add colors to make everything more readable
+TODO: create weapon library
+TODO: create button to add completed weapon to library
+TODO: create way to click on elements in bottom display box and have it bring up the relevant panel for EDITING, change color of field, etc
+
+
+
+Equipment
+Item (Name, cost, weight, hit points, hardness, intended for size, equip location)
+Weapon (name, hands used, CritMult, 19, range inc, rangetype, proficiency)
+DamageDie (die size, type of damage)
+Powers
+Powers
+PowerNames (Name, Source)
+Armor (name, armortype, AC bonus, max dex bonus, armor check penalty, arcane spell failure chance)
+Powers
+
+
+ItemForge
+TASKS:  Build XML elements (item, weapon, armor, powername, damagedie)
+Validate required attributes are present
+Validate attribute values are valid (not empty)
+Assemble XML elements (add children to weapon, armor, item)
+Validate children are of correct types
+Add elements to list of elements
+DATA: Elements of each type created (For display)
+Valid values for attribute
+Valid attributes for elements
+Valid children for elements
+
+
+BUILDING
+//Create validated XElement
+//Validate XElement name
+//get valid values for XElement name
+//compare given to valid
+
+//Check for required attributes
+//get required attributes for XElement name
+//compare given to valid
+
+//Validate XElement attribute names
+//get list of valid attribute names based on XElement name
+//compare given to valid
+
+//Validate XElement attribute values
+//get list of valid values for attributes
+//compare attribute name to attribute value (within context of XElement name)
+
+//Create element
+
+//Assemble validated XML node with children
+//Validate types of children vs parent
+//get list of valid child XElement names based on parent name
+
+//Assemble
+
+DATA:
+*  Valid XElement Values
+Required attribute for given XElement
+Valid Attribute names for given XElement
+Valid Attribute values
+*  Valid child XElement names for given xlem
+
+-->
