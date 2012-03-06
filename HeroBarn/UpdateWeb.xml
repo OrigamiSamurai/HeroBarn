@@ -2,7 +2,7 @@
 
 <Fields>
   <Equipment>
-    <!-- SPECIAL: Can modify anything, need restriction check when equippingand for tooltip etc -->
+    <!-- SPECIAL: Can modify anything, need restriction check when equippingand for tooltip -->
   </Equipment>
   <ExperiencePoints />
   <Wealth />
