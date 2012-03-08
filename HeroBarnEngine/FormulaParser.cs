@@ -37,7 +37,44 @@ namespace HeroBarn
                         //save as node
                     //replace where  
             //STEP 3: save parenthetical value as numerical or generic named variable, lather rinse repeat... by replacing the previously evaluated expressions with something else?
-            
+            /*
+             * <function name="ROUNDUP">
+             *   <parenthesis>
+             *     <variable>a</variable>
+             *     <operator>+</operator>
+             *     <variable>b<variable>
+             *   </parenthesis>
+             *   <operation>/</operation>
+             *   <number>2</number>
+             *   <operator>-</operator>
+             *   <number>3</number>
+             *   <operator>*</operator>
+             *   <number>5</number>
+             * </function>
+             * 
+             * steps to actually computer this: need to flatten this calculation somehow... I.E. do the first deepest levels FIRST
+             * need to find out how many levels of descendents there are - does function that does this need to know how many levels? NO
+             * 
+             * 1) find out if the given element has any children
+             * 2) if it does, start the function on IT
+             * 3) etc, until you reach the first element with no children
+             * 4) gather its siblings
+             * 5) process them
+             *     now, on an even playing field (no functions or parentheses) you should have just the basic operators
+             *     check to make sure you have an alternating pattern of variable, operator, variable....operator, variable
+             *     if so, find the first operator, and check if there is a second operator
+             *     if there is, check if it has a higher PEMDAS priority
+             *     if not, operate on the first two variable using the first operator
+             *       get value of variable OR use numeric value
+             *     if so, then operate on the second and third variables, since there should only be +- or * / (guaranteed to be a third variable here)
+             *       replace the variable or number nodes acted upon with a single numeric value
+             *          OPERATING ON TWO values
+             *              get value of first field, get value of second field, get operator, send to function that takes those inputs and passes them to the appropriate calculator function and returns a value
+             *              take the single value and replace that portion of the expression tree with the single value
+             *  iterate until only a single value remains
+             *  then iterate this process again until only a single value remains
+             * 
+             * 
 
         //bnf - syntax for describing language syntax
         
