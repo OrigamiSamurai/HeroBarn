@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4B9DD0DD-470D-4B92-9AB8-92B302174944}</ProjectGuid>
+    <ProjectGuid>{F6F931BA-78EF-4AEF-948E-E727D234C771}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HeroBarnEngine</RootNamespace>
-    <AssemblyName>HeroBarnEngine</AssemblyName>
+    <RootNamespace>MathParser</RootNamespace>
+    <AssemblyName>MathParser</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlEngine.cs" />
-    <Compile Include="Field.cs" />
+    <Compile Include="CalcProcessor.cs" />
+    <Compile Include="CalcToken.cs" />
+    <Compile Include="CalcVariables.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

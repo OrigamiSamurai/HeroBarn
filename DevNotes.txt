@@ -1,0 +1,194 @@
+ENGINE NOTES
+
+Dictionary<Field> FieldsList to specify list of fields available (used to iterate for serialization, deserialization, and get specific instance values)
+
+Field(id,value,formula,children)
+  constructor: insert default value of "" for formula, insert default value of empty array for children, append self to List<Field> FieldsList
+  string id = "name"
+  TYPE value = TYPEDVALUE
+  formula = null/0/"" or "(field1+field2/field3)"
+  array(string) children = [] or ["field1id" , "field2id"]
+  *method to update private value variable includes raising custom fieldValueChanged event 
+
+CascadeListener/Main Engine
+  getField(string name)
+    find dictionary<Field> entry with given name
+
+  onFieldValueChanged(object sender, eventargs -[newValue, type]) - fires on fieldValueChanged event
+    getChildFields(stirng fieldId=sender.id)
+    if fieldid.children not empty, foreach fieldid.children:
+      cascadingFieldUpdate(targetfieldid)
+
+  cascadingFieldUpdate(fieldid)
+    IF fieldid.value type is number, newValue = parse/calculate(fieldid.formula) *include defaults for calculation purposes for each type to avoid errors when no data is present yet (full page refresh in UI or new character)
+    fieldid.value = newValue
+
+FormulaParser
+  http://www.codeproject.com/script/Articles/ViewDownloads.aspx?aid=21137
+  http://www.codeproject.com/Articles/21137/Inside-the-Mathematical-Expressions-Evaluator
+  pass in current field values as dictionary and add to variables dictionary for use in calculatorlibrary? (here is where we would need to add default values to avoid errors if no values are present)
+  NOTE: include ability to override several values in dictionary to provide support for conditional modifiers
+  NOTE: cast field values as double precision first
+  NOTE: investigate OnVariableStore event
+  strip out extraneous code, just use calclib files
+  return result as double
+  convert back to appropriate type and update field (NOTE: include support for updating copy of the field for conditional modifiers)
+
+DataHandler
+  serialize to XML
+  deserialize from XML
+    register objects with FieldsList
+    need way to deal with duplicates (what happens if you already have fields loaded and now you load something else....?)
+
+UI: COMMAND LINE TO START
+construct field via command line
+  createField(name, value, formula, children)
+  createField(name, value)
+view field via command line
+  printField(name)
+create output for fieldValueChanged event
+  OnFieldValueChanged
+  printField(OnFieldValueChanged.sender)
+update field via command line
+  editFieldValue(name, value)
+  editFieldFormula(name, formula)
+  editFieldChildren(name, children)
+serialize fields
+  serializeFieldsList(filepath/filename)
+deserialize fields
+  deserializeFieldsList(args) - /o for overwrite, /a for add-only, /p for prompt
+help
+  accept /? or /h to print instructions/documentation
+
+PHASE 2: add support for substitute field values, formulas, and static formulas in text
+Support for Field value Modifiers
+  Conditional modifiers (what-if versions of stats)
+  -Gist: Create a list of modified stats and use them for calculation
+  -Gist: Parser/calculator would use these values instead...
+  -pass modified field to parser, take note of which downstream fields are updated (capture this for use in tooltips) and encapsulate them from the "real" stats
+Support for formula modifiers
+  -oh wait, just pass in a different formula...?
+Support for non-targetable, non-updating formulas/values in text fields (Only re-calculated if the text field is re-rendered, for use in hover boxes, etc)
+  create markup for static, non-targetable formulas using wiki markup style ( [[formula]] ) in a text field
+  create text parser to check for formulas, calculate them, then spit them back out and concatenate
+  apply text parser to some/all text fields
+
+
+  
+PHASE 3: add support for more complex data
+
+active modifiers
+  list of all effects being applied to field values / formulas
+inactive modifiers
+  list of all effects NOT being applied to field values / formulas (is this useful?)
+  
+Power
+  should have a name, description
+  may contain several modifiers
+    modifier: fieldid, newValue (may just be old value +/-/* etc)
+
+Power as specialized field?
+  Name = "name"
+  Value = "description"
+  Modifiers = [ targetfield, newValue, target field, newValue, etc ] 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+namespace d20.pathfinder.weapons
+  weapon data
+    base damage
+    enhancement bonus (to hit)
+    enhancement bonus (damage)
+    critical multiplier
+    critical range
+    damage types
+    cost
+    size
+    material (determines hardness)
+    hardness
+    hit points
+    magic
+    unique
+    name
+    min reach
+    max reach
+    range increment
+    wieght
+    special qualities
+    proficiencies
+    OTHER
+  weapon methods
+namespace d20.pathfinder.statblock
+  statblock data
+    base str
+    current str
+    total hp
+    current hp
+    non lethal damage
+    collection of weapons
+    wealth
+    
+  statblock method
+    stat check
+    heal damage
+    take damage
+    
+namespace d.20.character
