@@ -65,7 +65,13 @@ namespace HeroBarnEngine
         {
             if (selectField(fieldName).fieldValueType == typeof(int) || selectField(fieldName).fieldValueType == typeof(double))
             {
-                Calculator calc = new Calculator();   
+                MathParser.Calculator calc = new MathParser.Calculator();
+                string formula = selectField(fieldName).formula;
+                var keys = new Dictionary<string, double> { };
+                //TODO: get variables needed? - crap, we need to do this dynamically or pre-crawl... sooooo... build in functionality to get data and add it to variables
+                calc.LoadVariables(keys);
+                calc.Evaluate(formula);
+                return 0;
             }
             else throw new Exception("The field value selected is not an integer or double-precision floating point number.");
         }

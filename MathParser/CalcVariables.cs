@@ -10,6 +10,8 @@ namespace MathParser
         Stack<double> operands;
         Stack<string> operators;
 
+        Dictionary<string, double> constants = new Dictionary<string, double> { };
+
         string token;
         int tokenPos;
         string expression;
@@ -24,6 +26,48 @@ namespace MathParser
             LoadConstants();
             Clear();
         }
+
+        public void AddConstant(string constantName, double constantValue)
+        {
+            constants.Add(constantName, constantValue);
+        }
+
+        public void LoadConstants()
+        {
+            constants = new Dictionary<string, double> { };
+        }
+
+        public void LoadConstants(Dictionary<string,double> newConstants)
+        {
+            constants = new Dictionary<string, double> { };
+            foreach (KeyValuePair<string,double> key in constants)
+            {
+                AddConstant(key.Key, key.Value);
+            }
+        }
+
+        public Dictionary<string, double> variables = new Dictionary<string, double> { };
+
+        public void LoadVariables(Dictionary<string, double> newVariables)
+        {
+            variables = newVariables;
+        }
+
+        public void AddVariable(string variableName, double variableValue)
+        {
+            variables.Add(variableName, variableValue);
+        }
+
+        public void SetVariable(string variableName, double variableValue)
+        {
+            AddVariable(variableName, variableValue);
+        }
+
+        public double GetVariable(string variablename)
+        {
+            return variables[variablename];
+        }
+
 
         public void Clear()
         {
@@ -47,7 +91,7 @@ namespace MathParser
             if (Normalize(ref expression))
             {
                 double result = Parse();
-                SetVariable(AnswerVar, result);
+                //SetVariable(AnswerVar, result);
                 return result;
             }
             else
