@@ -2,8 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeroBarnConsole", "HeroBarnConsole.csproj", "{9A6AD8EE-6175-44C5-836A-33128E787AC3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B9DD0DD-470D-4B92-9AB8-92B302174944} = {4B9DD0DD-470D-4B92-9AB8-92B302174944}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HeroBarnEngine", "..\HeroBarnEngine\HeroBarnEngine.csproj", "{4B9DD0DD-470D-4B92-9AB8-92B302174944}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F6F931BA-78EF-4AEF-948E-E727D234C771} = {F6F931BA-78EF-4AEF-948E-E727D234C771}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MathParser", "..\MathParser\MathParser.csproj", "{F6F931BA-78EF-4AEF-948E-E727D234C771}"
 EndProject

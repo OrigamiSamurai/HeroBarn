@@ -61,7 +61,14 @@ namespace HeroBarnEngine
             }
         }
 
-
+        public double parseFieldFormula(string fieldName)
+        {
+            if (selectField(fieldName).fieldValueType == typeof(int) || selectField(fieldName).fieldValueType == typeof(double))
+            {
+                Calculator calc = new Calculator();   
+            }
+            else throw new Exception("The field value selected is not an integer or double-precision floating point number.");
+        }
     
     }
 

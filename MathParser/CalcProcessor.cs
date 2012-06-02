@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace SevenZ.Calculator
+namespace MathParser
 {
     public partial class Calculator
     {
