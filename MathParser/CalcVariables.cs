@@ -65,7 +65,7 @@ namespace MathParser
 
         public double GetVariable(string variablename)
         {
-            return variables[variablename];
+                return variables[variablename];
         }
 
 

@@ -47,6 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HeroBarnEngine\HeroBarnEngine.csproj">
+      <Project>{4B9DD0DD-470D-4B92-9AB8-92B302174944}</Project>
+      <Name>HeroBarnEngine</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MathParser\MathParser.csproj">
       <Project>{F6F931BA-78EF-4AEF-948E-E727D234C771}</Project>
       <Name>MathParser</Name>

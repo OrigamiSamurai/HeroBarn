@@ -1,11 +1,15 @@
+#1 TODO: Add handling for empty child block, empty formula
+#2 code cleanup
+
 ENGINE NOTES
 
-Dictionary<Field> FieldsList to specify list of fields available (used to iterate for serialization, deserialization, and get specific instance values)
+List<Field> FieldsList to hold available fields (used to iterate for serialization, deserialization, and get specific instance values)
 
 Field(id,value,formula,children)
   constructor: insert default value of "" for formula, insert default value of empty array for children, append self to List<Field> FieldsList
   string id = "name"
-  TYPE value = TYPEDVALUE
+  type
+  value
   formula = null/0/"" or "(field1+field2/field3)"
   array(string) children = [] or ["field1id" , "field2id"]
   *method to update private value variable includes raising custom fieldValueChanged event 

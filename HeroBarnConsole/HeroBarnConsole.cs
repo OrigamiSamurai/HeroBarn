@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HeroBarnEngine;
 
 namespace HeroBarnConsole
 {
@@ -13,8 +14,6 @@ namespace HeroBarnConsole
 
         static void Main(string[] args)
         {
-
-
             Console.Write("Welcome! ");
             
             do
@@ -34,34 +33,63 @@ namespace HeroBarnConsole
             {
                 string evalstring = consoleInput.Substring(6);
                 Console.WriteLine("You are evaluating: " + evalstring);
-                MathParser.Calculator calc = new MathParser.Calculator();
-                try
-                {
-                    calc.LoadVariables(consoleVariables);
-                    Console.WriteLine("Your result: " + calc.Evaluate(evalstring));
-                }
+               // try
+             //   {
+                    Console.WriteLine("Your result: " + ControlEngine.parseFormula(evalstring));
+              /*  }
                 catch
                 {
                     Console.WriteLine("That's a bad expression. Note: I don't support variable names yet.");
-                }
+                }*/
             }
-            else if (consoleInput.StartsWith("Var: "))
+            else if (consoleInput.StartsWith("Field: "))
             {
-                try
-                {
-                    string variableString = consoleInput.Substring(5);
-                    int spaceIndex = variableString.IndexOf(" ");
-                    string variableName = variableString.Substring(0, spaceIndex);
-                    string variableValue = variableString.Substring(spaceIndex + 1);
-                    Console.WriteLine("Name: \"{0}\"   Value: \"{1}\"", variableName, variableValue);
-                    double doublevalue = Convert.ToDouble(variableValue);
-                    consoleVariables.Add(variableName, doublevalue);
-                    Console.WriteLine(consoleVariables.Last().ToString());
-                }
+               // try
+                //{
+                    string fieldString = consoleInput.Substring(7);
+                    int firstSpaceIndex = fieldString.IndexOf(" ");
+                    string fieldName = fieldString.Substring(0, firstSpaceIndex);
+                    int secondSpaceIndex = fieldString.IndexOf(" ",firstSpaceIndex+1);
+                    string fieldValue = fieldString.Substring(firstSpaceIndex+1,secondSpaceIndex-firstSpaceIndex-1);
+                    string formulaValue = fieldString.Substring(secondSpaceIndex+1);
+                    Console.WriteLine("Name: \"{0}\"   Value: \"{1}\"   Formula: \"{2}\"", fieldName, fieldValue,formulaValue);
+                    double doubleValue = Convert.ToDouble(fieldValue);
+                    ControlEngine.createDoubleField(fieldName, doubleValue,formulaValue);
+              /*  }
                 catch
                 {
                     Console.WriteLine("Oops! That was incorrectly formatted. Try \"Eval: variableName variableValue\" next time.");
-                }
+                }*/
+            }
+            else if (consoleInput.StartsWith("Edit: "))
+            {
+                string fieldString = consoleInput.Substring(6);
+                int firstSpaceIndex = fieldString.IndexOf(" ");
+                string fieldName = fieldString.Substring(0, firstSpaceIndex);
+                string fieldValue = fieldString.Substring(firstSpaceIndex + 1);
+                Console.WriteLine("Name: \"{0}\"   Value: \"{1}\"", fieldName, fieldValue);
+                ControlEngine.FieldList.First(x => x.name == fieldName).fieldValue = Convert.ToDouble(fieldValue);
+                Console.WriteLine("Value changed.");
+            }
+            else if (consoleInput.StartsWith("Child: "))
+            {
+                string fieldString = consoleInput.Substring(7);
+                int firstSpaceIndex = fieldString.IndexOf(" ");
+                string fieldName = fieldString.Substring(0, firstSpaceIndex);
+                string childName = fieldString.Substring(firstSpaceIndex + 1);
+                Console.WriteLine("Name: \"{0}\"   Child:\"{1}\"", fieldName, childName);
+                ControlEngine.FieldList.First(x => x.name == fieldName).childNames = new List<string> { childName };
+                Console.WriteLine("Child changed.");
+            }
+            else if (consoleInput.StartsWith("Save"))
+            {
+                ControlEngine.SaveFields();
+                Console.WriteLine("Fields saved.");
+            }
+            else if (consoleInput.StartsWith("Load"))
+            {
+                ControlEngine.LoadFields();
+                Console.WriteLine("Fields loaded.");
             }
             else
             {

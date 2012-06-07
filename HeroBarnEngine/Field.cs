@@ -5,22 +5,31 @@ using System.Text;
 
 namespace HeroBarnEngine
 {
-
+    //[System.Xml.Serialization.XmlInclude(typeof(StringField))]
+    //[System.Xml.Serialization.XmlInclude(typeof(DoubleField))]
+    //[System.Xml.Serialization.XmlInclude(typeof(IntField))]
+    [Serializable]
     public class Field
     {
         private string m_name;
         private Type m_fieldValueType;
         private object m_fieldValue;
-        private string m_formula { set; get; }
-        private List<string> m_childNames { set; get; }
+        private string m_formula;
+        private List<string> m_childNames;
+
+        protected Field()
+        {
+        }
 
         protected Field(string Name, Type fieldValueType, object fieldValue, string Formula = "", List<string> ChildNames = null)
         {
             m_name = Name;
-            m_fieldValueType = null;
+            m_fieldValueType = fieldValueType;
             m_fieldValue = fieldValue;
             m_formula = Formula;
             m_childNames = ChildNames;
+            ControlEngine.FieldList.Add(this);
+            FieldValueChangedEventArgs e = new FieldValueChangedEventArgs(this.name, m_fieldValue, Type.GetType("System." + m_fieldValueType.ToString()));
         }
 
         public string name
@@ -36,7 +45,7 @@ namespace HeroBarnEngine
         public object fieldValue
         {
             get { return m_fieldValue; }
-            set { m_fieldValue = value; FieldValueChangedEventArgs e = new FieldValueChangedEventArgs(this.name, value, Type.GetType("System." + m_fieldValueType.ToString())); }
+            set { m_fieldValue = value; OnFieldValueChanged(this, new FieldValueChangedEventArgs(this.name, value, Type.GetType("System." + m_fieldValueType.ToString()))); }
         }
         public string formula
         {
@@ -48,11 +57,29 @@ namespace HeroBarnEngine
             get { return m_childNames; }
             set { m_childNames = value; }
         }
+
+        public delegate void FieldValueChangedEventHandler(object sender, FieldValueChangedEventArgs e);
+
+        public event FieldValueChangedEventHandler FieldValueChanged;
+
+        protected virtual void OnFieldValueChanged(object sender, FieldValueChangedEventArgs e)
+        {
+            if (FieldValueChanged != null)
+            {
+                FieldValueChanged(this, e);
+            }
+        }
     }
 
+    [Serializable]
     public class StringField : Field
     {
         private string m_fieldValue { get; set; }
+
+        private StringField()
+            : base()
+        {
+        }
 
         public StringField(string name, object fieldValue, Type myType, string formula, List<string> childNames)
             : base(name, myType, fieldValue, formula, childNames)
@@ -64,14 +91,20 @@ namespace HeroBarnEngine
         public new object fieldValue
         {
             get { return m_fieldValue; }
-            set { m_fieldValue = value.ToString(); FieldValueChangedEventArgs e = new FieldValueChangedEventArgs(this.name, value, Type.GetType("System.String")); }
+            set { m_fieldValue = value.ToString(); OnFieldValueChanged(this, new FieldValueChangedEventArgs(this.name, value, Type.GetType("System.String"))); }
         }
     }
 
+    [Serializable]
     public class DoubleField : Field
     {
         private double m_fieldValue { get; set; }
 
+        private DoubleField()
+            : base()
+        {
+        }
+        
         public DoubleField(string name, object fieldValue, Type myType, string formula, List<string> childNames)
             : base(name, myType, fieldValue, formula, childNames)
         {
@@ -81,13 +114,19 @@ namespace HeroBarnEngine
         public new object fieldValue
         {
             get { return m_fieldValue; }
-            set { m_fieldValue = Convert.ToDouble(value); FieldValueChangedEventArgs e = new FieldValueChangedEventArgs(this.name, value, Type.GetType("System.Double")); }
+            set { m_fieldValue = Convert.ToDouble(value); OnFieldValueChanged(this, new FieldValueChangedEventArgs(this.name, value, Type.GetType("System.Double"))); }
         }
     }
     
+    [Serializable]
     public class IntField : Field
     {
         private int m_fieldValue { get; set; }
+
+        private IntField()
+            : base()
+        {
+        }
 
         public IntField(string name, object value, Type myType, string formula, List<string> childNames)
             : base(name, myType, value, formula, childNames)
@@ -98,7 +137,7 @@ namespace HeroBarnEngine
         public new object fieldValue
         {
             get { return m_fieldValue; }
-            set { m_fieldValue = Convert.ToInt32(value); FieldValueChangedEventArgs e = new FieldValueChangedEventArgs(this.name, value, Type.GetType("System.Int32")); }
+            set { m_fieldValue = Convert.ToInt32(value); OnFieldValueChanged(this, new FieldValueChangedEventArgs(this.name, value, Type.GetType("System.Int32"))); }
         }
     }
 
