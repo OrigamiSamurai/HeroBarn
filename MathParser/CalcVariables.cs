@@ -11,6 +11,7 @@ namespace MathParser
         Stack<string> operators;
 
         Dictionary<string, double> constants = new Dictionary<string, double> { };
+        public Dictionary<string, double> variables = new Dictionary<string, double> { };
 
         string token;
         int tokenPos;
@@ -46,7 +47,7 @@ namespace MathParser
             }
         }
 
-        public Dictionary<string, double> variables = new Dictionary<string, double> { };
+
 
         public void LoadVariables(Dictionary<string, double> newVariables)
         {

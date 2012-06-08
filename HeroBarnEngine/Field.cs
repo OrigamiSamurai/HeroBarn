@@ -5,9 +5,6 @@ using System.Text;
 
 namespace HeroBarnEngine
 {
-    //[System.Xml.Serialization.XmlInclude(typeof(StringField))]
-    //[System.Xml.Serialization.XmlInclude(typeof(DoubleField))]
-    //[System.Xml.Serialization.XmlInclude(typeof(IntField))]
     [Serializable]
     public class Field
     {
@@ -17,9 +14,9 @@ namespace HeroBarnEngine
         private string m_formula;
         private List<string> m_childNames;
 
-        protected Field()
+        /*  protected Field()
         {
-        }
+        }  */
 
         protected Field(string Name, Type fieldValueType, object fieldValue, string Formula = "", List<string> ChildNames = null)
         {
@@ -76,10 +73,10 @@ namespace HeroBarnEngine
     {
         private string m_fieldValue { get; set; }
 
-        private StringField()
+      /*  private StringField()
             : base()
         {
-        }
+        } */
 
         public StringField(string name, object fieldValue, Type myType, string formula, List<string> childNames)
             : base(name, myType, fieldValue, formula, childNames)
@@ -100,10 +97,10 @@ namespace HeroBarnEngine
     {
         private double m_fieldValue { get; set; }
 
-        private DoubleField()
+      /*  private DoubleField()
             : base()
         {
-        }
+        }  */
         
         public DoubleField(string name, object fieldValue, Type myType, string formula, List<string> childNames)
             : base(name, myType, fieldValue, formula, childNames)
@@ -123,10 +120,10 @@ namespace HeroBarnEngine
     {
         private int m_fieldValue { get; set; }
 
-        private IntField()
+        /*  private IntField()
             : base()
         {
-        }
+        } */
 
         public IntField(string name, object value, Type myType, string formula, List<string> childNames)
             : base(name, myType, value, formula, childNames)

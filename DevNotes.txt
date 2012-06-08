@@ -1,5 +1,5 @@
-#1 TODO: Add handling for empty child block, empty formula
-#2 code cleanup
+#2 implement ControlEngine as Singleton (private constructor with static method to call constructor and check if an instance exists, add static variable in class that's reference to object itself - use interface to do that)
+# for UI refreshing of fields, gather list of all fields that have been modified first, then refresh said fields
 
 ENGINE NOTES
 

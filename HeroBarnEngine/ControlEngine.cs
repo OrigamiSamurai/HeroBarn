@@ -24,28 +24,31 @@ namespace HeroBarnEngine
             else return false;
         }
 
+
+
         public static void createDoubleField(string name, double fieldValue, string formulaValue)
         {
-            var newField = new DoubleField(name, fieldValue, typeof(double), formulaValue, new List<string> { "b" });
+            var newField = new DoubleField(name, fieldValue, typeof(double), formulaValue, new List<string> { "" });
             FieldList.First(x => x.name == name).FieldValueChanged += new Field.FieldValueChangedEventHandler(FieldValueChanged);
         }
 
         static public Field selectField(string fieldName)
         {
-            //if (checkForExistingField(fieldName) == true)
-            //{
+            if (checkForExistingField(fieldName) == true)
+            {
                 var matchingNames = from field in FieldList
                                     where field.name == fieldName
                                     select field;
                 return matchingNames.First();
-            //}
-            //else throw new System.Exception("There was an error when attempting to find the field in the FieldList.");    
+            }
+            else throw new System.Exception("There was an error when attempting to find the field in the FieldList.");    
         }
 
         public static void FieldValueChanged(object sender, EventArgs e)
         {
             if (sender is Field)
             {
+                Console.WriteLine("FieldValueChanged: {0} to {1}", ((Field)sender).name, ((FieldValueChangedEventArgs)e).newValue); //REMOVE
                 updateCascadeField(((Field)sender).name);
             }
         }
@@ -53,11 +56,15 @@ namespace HeroBarnEngine
         public static void updateCascadeField(string parentFieldName)
         {
             {
-                List<string> childrenList = selectField(parentFieldName).childNames;
-                if (childrenList.Count() > 0)
+                Field parentField = selectField(parentFieldName);
+                if ((parentField.childNames != null) && (parentField.childNames.Count() > 0) && (parentField.childNames[0] != ""))
                 {
+                    Console.WriteLine("updateCascadeField: called by {0}, and children property is not empty or null", parentFieldName); //REMOVE
+                    List<string> childrenList = parentField.childNames;
                     foreach (string childName in childrenList)
                     {
+                        Console.WriteLine("\"{0}\" is a child in the children list", childName); //REMOVE
+                        Console.WriteLine("parsing {0} now... and then changing the value of {0}", childName); //REMOVE
                         selectField(childName).fieldValue = parseFieldFormula(childName);
                     }
                 }
@@ -68,8 +75,12 @@ namespace HeroBarnEngine
         {
             if (selectField(fieldName).fieldValueType == typeof(int) || selectField(fieldName).fieldValueType == typeof(double))
             {
-                string formula = selectField(fieldName).formula;
-                return parseFormula(formula);
+                if (selectField(fieldName).formula != null && selectField(fieldName).formula != "")
+                {
+                    string formula = selectField(fieldName).formula;
+                    return parseFormula(formula);
+                }
+                else throw new Exception("The targeted field does not have a formula defined.");
             }
             else throw new Exception("The field value selected is not an integer or double-precision floating point number.");
         }
@@ -98,11 +109,6 @@ namespace HeroBarnEngine
             Stream stream = new FileStream("FieldList.bin",FileMode.Create,FileAccess.Write,FileShare.None);
             formatter.Serialize(stream, FieldList);
             stream.Close();
-            /*
-            System.Xml.Serialization.XmlSerializer writer = new System.Xml.Serialization.XmlSerializer(typeof(List<Field>));
-            System.IO.StreamWriter file = new System.IO.StreamWriter("FieldList.xml");
-            writer.Serialize(file, FieldList);
-            file.Close(); */
         }
 
         public static void LoadFields()
@@ -111,10 +117,6 @@ namespace HeroBarnEngine
             Stream stream = new FileStream("FieldList.bin", FileMode.Open, FileAccess.Read, FileShare.Read);
             FieldList = (List<Field>)formatter.Deserialize(stream);
             stream.Close();
-            foreach (Field field in FieldList)
-            {
-                field.FieldValueChanged += new Field.FieldValueChangedEventHandler(FieldValueChanged);
-            }
         }
     }
 
