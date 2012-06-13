@@ -1,31 +1,12 @@
-#2 implement ControlEngine as Singleton (private constructor with static method to call constructor and check if an instance exists, add static variable in class that's reference to object itself - use interface to do that)
-# for UI refreshing of fields, gather list of all fields that have been modified first, then refresh said fields
+# implement ControlEngine as Singleton (private constructor with static method to call constructor and check if an instance exists, add static variable in class that's reference to object itself - use interface to do that)
+
+## Find solution to avoid needless updating of fields over and over again
+ # for UI refreshing of fields, gather list of all fields that have been modified first, then refresh said fields OR
+ # implement check before cascading. If value has not changed, do not cascade (include override ability to refresh all fields?)
+# list of functions available via the math parser and syntax
+
 
 ENGINE NOTES
-
-List<Field> FieldsList to hold available fields (used to iterate for serialization, deserialization, and get specific instance values)
-
-Field(id,value,formula,children)
-  constructor: insert default value of "" for formula, insert default value of empty array for children, append self to List<Field> FieldsList
-  string id = "name"
-  type
-  value
-  formula = null/0/"" or "(field1+field2/field3)"
-  array(string) children = [] or ["field1id" , "field2id"]
-  *method to update private value variable includes raising custom fieldValueChanged event 
-
-CascadeListener/Main Engine
-  getField(string name)
-    find dictionary<Field> entry with given name
-
-  onFieldValueChanged(object sender, eventargs -[newValue, type]) - fires on fieldValueChanged event
-    getChildFields(stirng fieldId=sender.id)
-    if fieldid.children not empty, foreach fieldid.children:
-      cascadingFieldUpdate(targetfieldid)
-
-  cascadingFieldUpdate(fieldid)
-    IF fieldid.value type is number, newValue = parse/calculate(fieldid.formula) *include defaults for calculation purposes for each type to avoid errors when no data is present yet (full page refresh in UI or new character)
-    fieldid.value = newValue
 
 FormulaParser
   http://www.codeproject.com/script/Articles/ViewDownloads.aspx?aid=21137
